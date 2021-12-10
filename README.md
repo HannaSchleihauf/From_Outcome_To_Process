@@ -90,3 +90,7 @@ supplementary.analysis.better.job.1000.R
 Output of Analyses: 
 supplementary.analysis.better.job.1000.RData
 supplementary.analysis.help.seeking.1000.RData
+
+## Functions
+
+All functions in this folder are written and provided by Roger Mundry.
