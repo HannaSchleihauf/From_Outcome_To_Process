@@ -42,6 +42,8 @@ freq.wide <- freq.wide[-(13:24), ]
 
 freq$better.job <- relevel(freq$better.job, ref = "1")
 
+freq$condition <- factor(freq$condition, levels = c("outcome.only", "process.only", "outcome.vs.process"))
+
 dev.off()
 p <- freq %>%
   ggplot(aes(x = age.group.sum, y = new, fill = factor(better.job))) +
@@ -50,7 +52,7 @@ p <- freq %>%
 p <- p + facet_wrap(~condition,
   labeller = labeller(condition = c(
     "outcome.only" = "outcome condition",
-    "outcome.vs.process" = "process vs.\noutcome condition",
+    "outcome.vs.process" = "process-vs-\noutcome condition",
     "process.only" = "process condition"
   ))
 )
@@ -106,6 +108,8 @@ freq.wide <- freq.wide[-(13:24), ]
 
 freq$better.job <- relevel(freq$better.job, ref = "1")
 
+freq$condition <- factor(freq$condition, levels = c("outcome.only", "process.only", "outcome.vs.process"))
+
 dev.off()
 
 p <- freq %>%
@@ -115,7 +119,7 @@ p <- freq %>%
 p <- p + facet_wrap(~condition,
   labeller = labeller(condition = c(
     "outcome.only" = "outcome condition",
-    "outcome.vs.process" = "process vs.\noutcome condition",
+    "outcome.vs.process" = "process-vs-\noutcome condition",
     "process.only" = "process condition"
   ))
 )

@@ -42,6 +42,8 @@ freq.wide = freq.wide[-(13:24),]
 
 freq$help.seeking = relevel(freq$help.seeking, ref = "1")
 
+freq$condition <- factor(freq$condition, levels = c("outcome.only", "process.only", "outcome.vs.process"))
+
 dev.off()
 p = freq %>%
         ggplot(aes(x = age.group.sum, y = new, fill = factor(help.seeking))) +
@@ -49,8 +51,9 @@ p = freq %>%
         labs(title="USA")
 p = p + facet_wrap(~condition, 
                    labeller = labeller(condition = c("outcome.only" = "outcome condition",
-                                                     "outcome.vs.process" = "process vs.\noutcome condition",
-                                                     "process.only" = "process condition")))
+                                                     "process.only" = "process condition",
+                                                     "outcome.vs.process" = "process-vs-\noutcome condition"
+                                                    )))
 p = p +  theme(plot.title = element_text(size=8, face="bold"),
                axis.title.x = element_blank(), 
                legend.title = element_blank(), 
@@ -97,6 +100,8 @@ freq.wide = freq.wide[-(13:24),]
 
 freq$help.seeking = relevel(freq$help.seeking, ref = "1")
 
+freq$condition <- factor(freq$condition, levels = c("outcome.only", "process.only", "outcome.vs.process"))
+
 dev.off()
 p = freq %>%
         ggplot(aes(x = age.group.sum, y = new, fill = factor(help.seeking))) +
@@ -104,8 +109,8 @@ p = freq %>%
         labs(title="China")
 p = p + facet_wrap(~condition, 
                    labeller = labeller(condition = c("outcome.only" = "outcome condition",
-                                                     "outcome.vs.process" = "process vs.\noutcome condition",
-                                                     "process.only" = "process condition")))
+                                                     "process.only" = "process condition",
+                                                     "outcome.vs.process" = "process-vs-\noutcome condition")))
 p = p +  theme(plot.title = element_text(size=8, face="bold"),
                axis.title.x = element_blank(), 
                legend.title = element_blank(), 
