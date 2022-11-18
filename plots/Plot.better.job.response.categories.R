@@ -14,11 +14,11 @@ xdata.china <- subset(xdata, xdata$culture == "china")
 xdata.usa <- subset(xdata, xdata$culture == "usa")
 
 levels(as.factor(xdata$better.job.why.cat))
-ftable(better.job.why.cat ~ condition + age.group.sum, xdata)
+ftable(better.job.why.cat ~ condition + age.group.sum, xdata.usa)
 
 ####### USA only
 # Plotting ----------------------------------------------------------------
-dev.off()
+#dev.off()
 
 xx <- ftable(better.job.why.cat ~ condition + age.group.sum, xdata.usa)
 
@@ -28,7 +28,7 @@ xx <- xx / yy
 
 freq.usa <- as.data.frame(xx)
 
-dev.off()
+#dev.off()
 p <- freq.usa %>%
   ggplot(aes(x = age.group.sum, y = Freq, fill = factor(better.job.why.cat))) +
   geom_bar(stat = "identity", width = .65) +
@@ -61,7 +61,7 @@ p1 <- p
 
 ####### China only
 # Plotting ----------------------------------------------------------------
-dev.off()
+#dev.off()
 
 xx <- ftable(better.job.why.cat ~ condition + age.group.sum, xdata.china)
 
@@ -71,7 +71,7 @@ xx <- xx / yy
 
 freq.china <- as.data.frame(xx)
 
-dev.off()
+#dev.off()
 p <- freq.china %>%
   ggplot(aes(x = age.group.sum, y = Freq, fill = factor(better.job.why.cat))) +
   geom_bar(stat = "identity", width = .65) +
@@ -106,3 +106,29 @@ figure <- ggarrange(p2, p1,
   ncol = 1, nrow = 2
 )
 figure
+
+xx = xdata[xdata$age.group.sum == "8.9" & xdata$culture == "china" & xdata$condition == "outcome.only" & xdata$help.seeking.why.cat == "other",]
+
+# create variable that indicates whether the word "luck" is in the response
+#install.packages("stringr")
+library("stringr")
+xdata$better.job.lucky <-  str_detect(xdata$better.job.why, "luck|福|运气|运气好的|幸运|好运")
+sum(xdata$better.job.lucky == "TRUE")
+
+ftable(better.job.lucky ~ culture + age.group + better.job.why.cat, xdata)
+ftable(better.job.lucky ~ better.job.why.cat + age.group , xdata)
+
+yy <-  xdata[xdata$better.job.lucky == "TRUE" & xdata$better.job.why.cat == "outcome",]
+xx <-  xdata[xdata$better.job.lucky == "TRUE" & xdata$better.job.why.cat == "process",]
+zz <-  xdata[xdata$better.job.lucky == "TRUE" & xdata$better.job.why.cat == "other",]
+
+
+xdata$help.seeking.lucky <-  str_detect(xdata$help.seeking.why, "luck|福|运气|运气好的|幸运|好运")
+sum(xdata$help.seeking.lucky == "TRUE")
+
+ftable(help.seeking.lucky ~ culture + age.group + help.seeking.why.cat, xdata)
+ftable(help.seeking.lucky ~ help.seeking.why.cat + age.group , xdata)
+
+yy <-  xdata[xdata$help.seeking.lucky == "TRUE" & xdata$help.seeking.why.cat == "outcome",]
+xx <-  xdata[xdata$help.seeking.lucky == "TRUE" & xdata$help.seeking.why.cat == "process",]
+zz <-  xdata[xdata$help.seeking.lucky == "TRUE" & xdata$help.seeking.why.cat == "other",]

@@ -1,0 +1,10 @@
+orig	min	max
+(Intercept)	-0.717	-0.767	-0.669
+age.group.sum6.7	0.842	0.794	0.892
+age.group.sum8.9	1.33	1.282	1.38
+age.group.sumadult	1.317	1.27	1.386
+cultureusa	0.117	0.07	0.168
+age.group.sum6.7:cultureusa	-0.506	-0.556	-0.449
+age.group.sum8.9:cultureusa	-0.294	-0.347	-0.247
+age.group.sumadult:cultureusa	-0.048	-0.117	-0.001
+sub.id@(Intercept)@NA	0	0	0

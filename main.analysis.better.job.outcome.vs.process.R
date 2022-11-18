@@ -123,3 +123,5 @@ emmip(emm1, ~ age.group.sum * culture, type = "link")
 emmip(emm1, ~ age.group.sum * culture, type = "response")
 
 save.image("analysis.better.job.outcome.vs.process.RData")
+
+

@@ -121,3 +121,5 @@ summary(contrast(emm1, "pairwise")[c(1, 23, 8, 26, 14, 28, 4, 11, 17, 22)],
 
 emmip(emm1, ~ age.group.sum * culture, type = "link")
 emmip(emm1, ~ age.group.sum * culture, type = "response")
+
+save.image("analysis.better.help.seeking.vs.process.RData")

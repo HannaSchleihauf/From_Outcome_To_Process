@@ -14,7 +14,6 @@ xdata.usa = subset(xdata, xdata$culture == "usa")
 
 ####### USA only 
 # Plotting ----------------------------------------------------------------
-dev.off() 
 
 xx = ftable(help.seeking ~ condition + age.group.sum, xdata.usa)
 ftable( age.group.sum ~ culture, xdata)/6
@@ -44,7 +43,6 @@ freq$help.seeking = relevel(freq$help.seeking, ref = "1")
 
 freq$condition <- factor(freq$condition, levels = c("outcome.only", "process.only", "outcome.vs.process"))
 
-dev.off()
 p = freq %>%
         ggplot(aes(x = age.group.sum, y = new, fill = factor(help.seeking))) +
         geom_bar(stat = "identity", width=.65) + 
@@ -102,7 +100,6 @@ freq$help.seeking = relevel(freq$help.seeking, ref = "1")
 
 freq$condition <- factor(freq$condition, levels = c("outcome.only", "process.only", "outcome.vs.process"))
 
-dev.off()
 p = freq %>%
         ggplot(aes(x = age.group.sum, y = new, fill = factor(help.seeking))) +
         geom_bar(stat = "identity", width=.65) + 
@@ -134,3 +131,29 @@ figure <- ggarrange(p2, p1,
 figure
 
 #annotate_figure(figure, fig.lab = "Rationality Judgement", fig.lab.face = "bold")
+
+# Plot with estimates -----------------------------------------------------
+load("analysis.better.help.seeking.vs.process.RData")
+xx <- as.data.frame(boot.res$ci.predicted)
+
+p <- ggplot(xx, 
+            aes(x = age.group.sum, 
+                y = fitted,  color = culture)) + 
+ geom_pointrange(aes(ymin = lower.cl, ymax = upper.cl), 
+                 position=position_dodge(width=c(0.6,0.4)), size = 1) #+
+ #geom_hline(yintercept=0.5,linetype=2, colour = "grey")
+p <- p +  xlab("") + 
+ ylab("predicted probability that\nparticipants evaluate process")
+p <- p +  scale_x_discrete(labels = c("4-5", "6-7", "8-9", "adults")) +
+ theme(axis.text.x = element_text(size = 10, face=NULL, 
+                                  margin = margin(t = 2, r = 0, b = 0, l = 0, 
+                                                  unit = "mm")),
+       axis.title.x = element_text(size = 5, face=NULL, 
+                                   margin = margin(t = 10, r = 0, b = 0, l = 0, 
+                                                   unit = "mm")), 
+       axis.title.y = element_text(size = 12, face=NULL,
+                                   margin = margin(t = 0, r = 3, b = 0, l = 0, 
+                                                   unit = "mm")),
+       legend.position="right", legend.title=element_blank())
+p <- p +  scale_color_manual(labels = c("China", "USA"), values = c("gray70", "black"))
+p

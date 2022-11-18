@@ -248,10 +248,10 @@ boot.plot.2.estimates <- c()
 
 # starting the loop
 contr <- glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 10000000))
+t.data$new.resp <- t.data$resp
 
 for (i in 1:1000) { # i=1
   set.seed(i)
-  t.data$new.resp <- t.data$resp
 
   xx <- sample(to.change.1, 1, replace = TRUE)
   t.data$new.resp[xx] <- ifelse(t.data$new.resp[xx] == 0, 1, 0)

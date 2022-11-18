@@ -27,7 +27,7 @@ xx <- xx / yy
 
 freq.usa <- as.data.frame(xx)
 
-dev.off()
+#dev.off()
 p <- freq.usa %>%
   ggplot(aes(x = age.group.sum, y = Freq, fill = factor(help.seeking.why.cat))) +
   geom_bar(stat = "identity", width = .65) +
@@ -64,7 +64,7 @@ p1 <- p
 
 ####### china only
 # Plotting ----------------------------------------------------------------
-dev.off()
+#dev.off()
 xx <- ftable(help.seeking.why.cat ~ condition + age.group.sum, xdata.china)
 
 ## frequency table as I need it, with changed signs
@@ -73,7 +73,7 @@ xx <- xx / yy
 
 freq.china <- as.data.frame(xx)
 
-dev.off()
+#dev.off()
 p <- freq.china %>%
   ggplot(aes(x = age.group.sum, y = Freq, fill = factor(help.seeking.why.cat))) +
   geom_bar(stat = "identity", width = .65) +
